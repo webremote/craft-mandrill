@@ -1,0 +1,10 @@
+{
+  "name": "WHITEdevelopment/craft-mandrill",
+  "description": "Send mail using Mandrill API",
+  "type": "craft-plugin",
+  "require": {
+    "composer/installers": "~1.0",
+    "mandrill/mandrill": "1.0.*",
+    "nesbot/carbon": "~1.14"
+  }
+}

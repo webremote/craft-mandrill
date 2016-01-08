@@ -1,0 +1,44 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    id: 'MandrillApiKey',
+    name: 'MandrillApiKey',
+    label: 'mandrill_api_key'|t,
+    value: settings.MandrillApiKey,
+    first: true,
+    autofocus: true
+}) }}
+
+{{ forms.textField({
+    id: 'MandrillApiTestKey',
+    name: 'MandrillApiTestKey',
+    label: 'mandrill_api_test_key'|t,
+    value: settings.MandrillApiTestKey,
+    first: false,
+    autofocus: false
+}) }}
+
+{{ forms.lightswitchField({
+    id: 'MandrillTestMode',
+    label: 'mandrill_test_mode'|t,
+    name: 'MandrillTestMode',
+    value: settings.MandrillTestMode,
+    on: (settings.MandrillTestMode is defined) ? settings.MandrillTestMode : ''
+}) }}
+
+{{ forms.textField({
+    id: 'MandrillSubAccount',
+    name: 'MandrillSubAccount',
+    label: 'mandrill_sub_account'|t,
+    value: settings.MandrillSubAccount,
+    first: false,
+    autofocus: false,
+}) }}
+
+{{ forms.lightswitchField({
+    id: 'MandrillShowCp',
+    label: 'mandrill_show_cp'|t,
+    name: 'MandrillShowCp',
+    value: settings.MandrillShowCp,
+    on: (settings.MandrillShowCp is defined) ? settings.MandrillShowCp : ''
+}) }}
