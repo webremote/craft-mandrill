@@ -53,11 +53,6 @@ class MandrillPlugin extends BasePlugin
         ];
     }
 
-    public function init()
-    {
-        require_once(CRAFT_PLUGINS_PATH.'mandrill/vendor/autoload.php');
-    }
-
     public function getSettingsHtml()
     {
         return craft()->templates->render('mandrill/settings', array(
