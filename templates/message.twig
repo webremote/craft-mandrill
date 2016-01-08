@@ -1,0 +1,41 @@
+{% extends "mandrill/_layout.twig" %}
+
+{% if messageId is not defined %}{% set messageId = null %}{% endif %}
+{% if message is not defined %}
+    {% if messageId %}
+        {% set message = craft.mandrill.message(messageId) %}
+        {% if not message %}{% exit 404 %}{% endif %}
+    {% else %}
+        {% set message = null %}
+    {% endif %}
+{% endif %}
+
+{% set locale = craft.i18n.getCurrentLocale() %}
+{% set localeData = craft.i18n.getLocaleData(locale.id) %}
+
+{% set content %}
+
+    <div class="grid" data-max-cols="3">
+
+        <div class="item" data-position="left" data-colspan="2">
+
+            <div class="pane meta">
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_sender'|t, 'value':message.sender} only %}
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_email'|t, 'value':message.email} only %}
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_subject'|t, 'value':message.subject} only %}
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_opens'|t, 'value':message.opens} only %}
+            </div>
+
+        </div>
+
+        <div class="item" data-position="right">
+            <div class="pane meta last">
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_ts'|t, 'value':message.ts|date('d-m-Y H:i')} only %}
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill_state'|t, 'value':message.state} only %}
+                {% include 'mandrill/_pane_data.twig' with {'name':'mandrill__id'|t, 'value':message._id} only %}
+            </div>
+        </div>
+
+    </div>
+
+{% endset %}

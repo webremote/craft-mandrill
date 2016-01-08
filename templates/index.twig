@@ -1,0 +1,30 @@
+{% extends "mandrill/_layout.twig" %}
+
+{% set content %}
+
+    {% set messages = craft.mandrill.messages %}
+
+    {% if messages|length %}
+        <table id="messages" class="data fullwidth">
+            <tr>
+                <th scope="col">{{ 'mandrill_email'|t }}</th>
+                <th scope="col">{{ 'mandrill_date'|t }}</th>
+            </tr>
+            {% for message in messages %}
+                <tr data-id="{{ message._id }}" data-name="{{ message.email|t }}">
+                    <td><a href="{{ url('mandrill/message/'~message._id) }}">{{ message.email }}</a></td>
+                    <td>
+                        {% set locale = craft.i18n.getCurrentLocale() %}
+                        {% set localeData = craft.i18n.getLocaleData(locale.id) %}
+                        {{ message.ts|date('d-m-Y H:i') }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>
+            {{ 'mandrill_no_messages_found'|t }}
+        </p>
+    {% endif %}
+
+{% endset %}
